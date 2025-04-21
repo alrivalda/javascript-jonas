@@ -17,7 +17,7 @@ const matilda = new Person('matilda', 2017);
 // Proses
 // 1. new -> membuat {} object kosong
 // 2. function dipanggil, this merujuk ke {}
-// 3. {} dihubungkan ke prototype
+// 3. {} dihubungkan ke prototype nya constructor
 // 4. function mengembalikan {}
 
 console.log(jonas instanceof Person);
@@ -47,3 +47,39 @@ console.log(jonas.__proto__);
 console.log(jonas.__proto__ === Person.prototype);
 console.log(Person.prototype.isPrototypeOf(Person)); // prototype di Person bukan milknya emlainkan akan dikasih ke object (prototype of linked project)
 console.log(Person.prototype.isPrototypeOf(jonas));
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.hasOwnProperty('species'));
+
+// Recap
+// Constructor function memiliki prototype property  -> dimana diisi methods
+// prototype punya reference back yaitu .constructor
+// prototype bukan Person melainkan objek yang dibuat dari Person
+// setelah objek dibuat, dihubungkan dengan prototype dengan __proto__
+// prototype chain -> object -> prototype -> object.prototype -> null
+// jika tidak ada di proto typesebelumnya akan terus mencari sampao object.prototype
+console.log(jonas.__proto__);
+// Object
+console.log(jonas.__proto__.__proto__);
+
+//Null
+console.log(jonas.__proto__.__proto__.__proto__);
+
+///--------------------ES6  Classes --------------------------
+
+// class expressions class masih functions
+// const PersonCl = class {};
+
+// class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // diluar constructor akan ada di prototype
+  calAge() {
+    console.log(2025 - this.birthYear);
+  }
+}
+
+const jessica = new PersonCl('jessica', 1996);
