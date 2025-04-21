@@ -76,10 +76,20 @@ class PersonCl {
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
-  // diluar constructor akan ada di prototype
+  // diluar constructor akan ada di .prototype
   calAge() {
     console.log(2025 - this.birthYear);
   }
 }
 
 const jessica = new PersonCl('jessica', 1996);
+
+PersonCl.prototype.greet = function () {
+  console.log(`hi ${this.firstName}`);
+};
+
+jessica.greet();
+
+// 1. kelas tidak diangkat atau tidak bisa digunakan sebelum dideklarasikan
+// 2. first class citizen -> dapat digunakan untuk pass dan return di fungsi
+// 3. body class selalu di eksekusi di mode strict
