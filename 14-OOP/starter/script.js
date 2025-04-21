@@ -80,6 +80,20 @@ class PersonCl {
   calAge() {
     console.log(2025 - this.birthYear);
   }
+
+  // ada methods dan properti di akhir
+  get age() {
+    return 2025 - this.birthYear;
+  }
+
+  //set properti yang sudah ada
+  set fullName(name) {
+    if (name.include(' ')) this._fullName = name;
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 }
 
 const jessica = new PersonCl('jessica', 1996);
@@ -93,3 +107,19 @@ jessica.greet();
 // 1. kelas tidak diangkat atau tidak bisa digunakan sebelum dideklarasikan
 // 2. first class citizen -> dapat digunakan untuk pass dan return di fungsi
 // 3. body class selalu di eksekusi di mode strict
+
+const account = {
+  owner: 'jonas',
+  mov: [5, 62, 46, 46],
+
+  get latest() {
+    return this.mov.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.mov.push(mov);
+  },
+};
+
+account.latest;
+account.latest = 50;
