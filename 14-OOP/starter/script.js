@@ -94,6 +94,10 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+
+  static hey() {
+    console.loh('Hey');
+  }
 }
 
 const jessica = new PersonCl('jessica', 1996);
@@ -123,3 +127,58 @@ const account = {
 
 account.latest;
 account.latest = 50;
+
+// Static Methods
+// ex Array.from() berada di constructor, bukan di prototype
+
+Person.hey = function () {
+  console.log('Hey');
+};
+
+Person.hey();
+
+// jonas.hey() -> eror karena tidak mewarisi
+
+// ------------- Object.create() --------------
+const PersonProto = {
+  calAge() {
+    console.log(2025 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto); // Empty Object yang dihubungkan dengan PersonProto prototype
+steven.name = 'Steven';
+steven.birthYear = '2998';
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 2003);
+
+////////////// inheritance Constructor
+
+/** 
+const Student = function (firstName, birthYear, course) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+  this.course = course;
+};
+
+*/
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Student.prototype = Person.prototype ini error karena akan overwrite
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.introduce = function () {
+  console.log(`Hei, my name is ${this.firstName} and I Study ${this.course}`);
+};
+
+Student.prototype.constructor = Student;
+const mike = new Student('Mike', 2020, 'Math');
+mike.introduce();
