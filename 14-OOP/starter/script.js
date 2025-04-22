@@ -157,7 +157,7 @@ steven.birthYear = '2998';
 const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 2003);
 
-////////////// inheritance Constructor
+// --------- INHERITANCE CONSTRUCTOR -----------------
 
 /** 
 const Student = function (firstName, birthYear, course) {
@@ -182,3 +182,78 @@ Student.prototype.introduce = function () {
 Student.prototype.constructor = Student;
 const mike = new Student('Mike', 2020, 'Math');
 mike.introduce();
+
+/// -------------- INHERITANCE IN CLASSES ----------------------
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // always ditulis di awal
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`Hei, my name is ${this.fullName} and I Study ${this.course}`);
+  }
+
+  calAge() {
+    console.log(`I\'m ${2025 - this.birthYear} years old `);
+  }
+}
+
+const martha = new StudentCl('Martha', 2003, 'Math');
+martha.calAge();
+
+// ------------- INHERITANCE Object.create() ----------------------------
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+const jay = Object.create(StudentProto);
+jay.init('jay', 2020, 'Math');
+jay.calAge();
+
+class Account {
+  locale = navigator.language;
+  #mov = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    console.log(`Terimakasih sudah membuka ${this.owner}`);
+  }
+
+  // public interfece dari objek kita daripada mengubahnya secara manual
+
+  getMovements() {
+    return this.#mov;
+  }
+  deposit(val) {
+    this.#mov.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.#mov.push(-val);
+    return this;
+  }
+
+  #approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+    }
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+console.log(acc1);
+
+// --------------- ENCAPSULATION ------------------------- in ES2020
