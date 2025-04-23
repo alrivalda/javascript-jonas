@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeoStat - Peta Interaktif Data Indonesia</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav a {
+        margin-left: 1rem;
+        color: white;
+        text-decoration: none;
+      }
+      .hero {
+        padding: 3rem 2rem;
+        background-color: #ecf0f1;
+        text-align: center;
+      }
+      .hero h1 {
+        margin-bottom: 1rem;
+      }
+      .hero button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      #map {
+        height: 500px;
+      }
+      .insights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 2rem;
+      }
+      .insight-card {
+        flex: 1 1 calc(33.333% - 1rem);
+        background: #f9f9f9;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      footer {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>GeoStat</h2>
+      <nav>
+        <a href="#">Beranda</a>
+        <a href="#">Dataset</a>
+        <a href="#">Insight</a>
+        <a href="#">Tentang</a>
+        <a href="#">Kontak</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Eksplorasi Data Indonesia Melalui Peta Interaktif</h1>
+      <p>
+        Visualisasikan data BPS seperti kemiskinan, pendidikan, dan kesehatan
+        dalam satu klik.
+      </p>
+      <button
+        onclick="document.getElementById('map').scrollIntoView({behavior: 'smooth'})"
+      >
+        Jelajahi Peta
+      </button>
+    </section>
+
+    <section id="map"></section>
+
+    <section class="insights">
+      <div class="insight-card">
+        <h3>Kemiskinan Tertinggi 2024</h3>
+        <p>
+          Wilayah dengan angka kemiskinan tertinggi berdasarkan data terbaru.
+        </p>
+      </div>
+      <div class="insight-card">
+        <h3>Indeks Pendidikan</h3>
+        <p>
+          Rangkuman wilayah dengan kualitas pendidikan terbaik dan terendah.
+        </p>
+      </div>
+      <div class="insight-card">
+        <h3>Kesehatan Masyarakat</h3>
+        <p>Data fasilitas kesehatan dan dampaknya pada IPM.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 GeoStat | Dibuat untuk Indonesia berbasis data</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+      const map = L.map("map").setView([-2.5489, 118.0149], 5);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Contoh marker dummy
+      L.marker([-6.2, 106.8166]).addTo(map).bindPopup("Jakarta - Contoh Data");
+    </script>
+  </body>
+</html>
