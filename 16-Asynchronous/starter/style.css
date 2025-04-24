@@ -124,3 +124,17 @@ body {
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
 }
+input[type='text'] {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+}
+
+input[type='text']:focus {
+  border-color: #5e9ed6;
+  outline: none;
+}
